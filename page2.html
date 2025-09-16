@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduScanAI Sénégal - Solution IA pour l'accessibilité éducative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --senegal-green: #00853f;
+            --senegal-yellow: #fcd116;
+            --senegal-red: #ce1126;
+            --dark: #333333;
+            --light: #F8F9FA;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f9fafb;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--senegal-green);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--senegal-green);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--senegal-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        nav ul li a:hover {
+            color: var(--senegal-green);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--senegal-green);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--senegal-green) 33%, var(--senegal-yellow) 33%, var(--senegal-yellow) 66%, var(--senegal-red) 66%);
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--senegal-green);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--senegal-green);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--senegal-red);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--senegal-green);
+            color: var(--senegal-green);
+        }
+        
+        .btn-outline:hover {
+            background: var(--senegal-green);
+            color: white;
+        }
+        
+        /* Demo Section */
+        .demo {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--senegal-green);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: 666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .demo-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .demo-explanation {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .demo-interactive {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .simulation-container {
+            border: 2px dashed var(--senegal-green);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .text-sample {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid var(--senegal-green);
+            min-height: 150px;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .control-group select, .control-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Styles pour la simulation */
+        .text-large {
+            font-size: 20px;
+        }
+        
+        .text-extra-large {
+            font-size: 24px;
+        }
+        
+        .high-contrast {
+            background-color: black;
+            color: white;
+            padding: 15px;
+        }
+        
+        .dyslexic-font {
+            font-family: 'Comic Sans MS', cursive;
+            letter-spacing: 1.2px;
+        }
+        
+        .highlighted {
+            background-color: yellow;
+            padding: 2px 0;
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+        }
+        
+        .problem-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .problem-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .problem-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .problem-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .challenges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .challenge-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--senegal-red);
+        }
+        
+        .challenge-card h3 {
+            color: var(--senegal-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .challenge-card h3 i {
+            margin-right: 10px;
+            color: var(--senegal-red);
+        }
+        
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--senegal-green);
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature i {
+            font-size: 40px;
+            color: var(--senegal-green);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Adaptation Section */
+        .adaptation {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+        }
+        
+        .adaptation-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .adaptation-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .adaptation-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .adaptation-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .adaptation-list {
+            margin: 20px 0;
+        }
+        
+        .adaptation-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .adaptation-list i {
+            color: var(--senegal-green);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        /* Impact Section */
+        .impact {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .impact-item {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background: var(--light);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--senegal-yellow);
+        }
+        
+        .impact-item i {
+            font-size: 40px;
+            color: var(--senegal-yellow);
+            margin-bottom: 20px;
+        }
+        
+        /* Economic Impact Section */
+        .economic-impact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+        }
+        
+        .economic-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .economic-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .economic-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .economic-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .economic-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .economic-stat {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .economic-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--senegal-green);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--senegal-yellow);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                top: 70px;
+                left: 0;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                display: none;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .problem-content, .adaptation-content, .economic-content, .demo-content {
+                flex-direction: column;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                max-width: 100%;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i> EduScanAI Sénégal
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="menu">
+                    <li><a href="#problem">Défis</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#demo">Démo</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#economic">Économique</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Education Inclusive par l'IA au Sénégal</h1>
+            <p>Projet développé par Mademba Sock Diop - Une solution innovante adaptée au contexte sénégalais pour aider les élèves avec des difficultés de lecture</p>
+            <a href="#demo" class="btn">Essayer la démo</a>
+            <a href="#solution" class="btn btn-outline">Découvrir la solution</a>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Démonstration Interactive</h2>
+                <p>Expérimentez comment EduScanAI aide les élèves avec des difficultés de lecture</p>
+            </div>
+            
+            <div class="demo-content">
+                <div class="demo-explanation">
+                    <h3>À quoi sert cette démonstration ?</h3>
+                    <p>Cette démonstration interactive vous permet de simuler l'expérience utilisateur d'EduScanAI. Vous pouvez :</p>
+                    
+                    <ul style="margin: 20px 0 20px 20px;">
+                        <li>Insérer n'importe quel texte de votre choix</li>
+                        <li>Voir comment le texte peut être adapté pour différents besoins</li>
+                        <li>Tester les fonctionnalités d'accessibilité</li>
+                        <li>Expérimenter la synthèse vocale en temps réel</li>
+                        <li>Comprendre comment l'IA transforme le contenu éducatif</li>
+                    </ul>
+                    
+                    <p>Cette démo montre les fonctionnalités principales de notre application qui utilise l'IA pour :</p>
+                    
+                    <ol style="margin: 20px 0 20px 20px;">
+                        <li>Adapter l'affichage du texte selon les besoins visuels</li>
+                        <li>Convertir le texte en parole pour aider à la compréhension</li>
+                        <li>Modifier la présentation pour les lecteurs dyslexiques</li>
+                        <li>Offrir une expérience personnalisée à chaque utilisateur</li>
+                    </ol>
+                </div>
+                
+                <div class="demo-interactive">
+                    <h3>Simulation Interactive</h3>
+                    <p>Expérimentez avec les options ci-dessous pour voir comment EduScanAI adapte le contenu :</p>
+                    
+                    <div class="simulation-container">
+                        <div class="control-group">
+                            <label for="custom-text">Votre texte personnalisé:</label>
+                            <textarea id="custom-text" class="text-input" placeholder="Écrivez ou collez votre texte ici..."></textarea>
+                        </div>
+                        
+                        <button class="btn" onclick="applyCustomText()"><i class="fas fa-sync-alt"></i> Appliquer le texte</button>
+                        
+                        <div id="text-sample" class="text-sample">
+                            <p>Le texte que vous saisirez apparaîtra ici. Vous pourrez ensuite tester les différentes adaptations.</p>
+                        </div>
+                        
+                        <div class="controls">
+                            <div class="control-group">
+                                <label for="font-size">Taille du texte:</label>
+                                <select id="font-size" onchange="updateTextStyle()">
+                                    <option value="normal">Normale</option>
+                                    <option value="large">Grande</option>
+                                    <option value="extra-large">Très grande</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="contrast">Contraste:</label>
+                                <select id="contrast" onchange="updateTextStyle()">
+                                    <option value="normal">Normal</option>
+                                    <option value="high">Élevé</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="font-type">Police:</label>
+                                <select id="font-type" onchange="updateTextStyle()">
+                                    <option value="normal">Standard</option>
+                                    <option value="dyslexic">Adaptée dyslexie</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="audio-controls">
+                            <button class="btn" onclick="startTextToSpeech()"><i class="fas fa-play"></i> Lire le texte</button>
+                            <button class="btn" onclick="pauseTextToSpeech()"><i class="fas fa-pause"></i> Pause</button>
+                            <button class="btn" onclick="stopTextToSpeech()"><i class="fas fa-stop"></i> Arrêter</button>
+                        </div>
+                        
+                        <div id="audio-status" style="margin-top: 15px; padding: 10px; background: #e8f4f8; border-radius: 5px; display: none;">
+                            <p><i class="fas fa-info-circle"></i> <span id="status-text">Lecture en cours...</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="problem">
+        <div class="container">
+            <div class="section-title">
+                <h2>Défis au Sénégal</h2>
+                <p>Les obstacles spécifiques rencontrés par les élèves avec des troubles d'apprentissage</p>
+            </div>
+            
+            <div class="challenges">
+                <div class="challenge-card">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Problèmes pédagogiques</h3>
+                    <p>Manque de supports adaptés, absence de formation des enseignants pour adapter leurs méthodes, évaluations non inclusives qui ne tiennent pas compte des troubles spécifiques.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-laptop"></i> Problèmes technologiques</h3>
+                    <p>Faible accès au numérique, absence d'outils spécialisés (loupes électroniques, logiciels de lecture d'écran), infrastructures scolaires peu inclusives avec éclairage insuffisant.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-users"></i> Problèmes sociaux</h3>
+                    <p>Stigmatisation des élèves avec troubles d'apprentissage, manque de formation des enseignants, politiques publiques avec des moyens limités pour l'éducation inclusive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="solution">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre solution adaptée</h2>
+                <p>EduScanAI utilise l'intelligence artificielle spécialement conçue pour le contexte sénégalais</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-file-audio"></i>
+                    <h3>Conversion texte-audio</h3>
+                    <p>Conversion des documents en contenus audio avec synthèse vocale en français et langues locales (wolof, pulaar, sérère).</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Application légère</h3>
+                    <p>Application mobile fonctionnant sur smartphones basiques, avec mode hors-ligne pour les zones sans connexion stable.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-eye"></i>
+                    <h3>Affichage adaptable</h3>
+                    <p>Options pour modifier taille des caractères, polices, contrastes et surligner les mots lors de la lecture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adaptation Section -->
+    <section class="adaptation">
+        <div class="container">
+            <div class="section-title">
+                <h2>Adaptations spécifiques pour le Sénégal</h2>
+                <p>Une solution conçue pour répondre aux réalités locales</p>
+            </div>
+            
+            <div class="adaptation-content">
+                <div class="adaptation-text">
+                    <h3>Fonctionnalités adaptées au contexte sénégalais</h3>
+                    <ul class="adaptation-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Multilinguisme</strong> : Synthèse vocale en français et langues locales (wolof, pulaar, sérère)</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Mode hors-ligne</strong> : Fonctionnement sans connexion internet continue</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Léger et compatible</strong> : Application optimisée pour smartphones basiques</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Interface intuitive</strong> : Icônes claires et navigation simple pour une prise en main facile</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Formation inclusive</strong> : Modules de formation pour enseignants et familles</li>
+                    </ul>
+                </div>
+                
+                <div class="adaptation-image">
+                    <img src="https://images.unsplash.com/photo-1577896851263-6c5ca2c08067?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Adaptation pour le Sénégal">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impact Social au Sénégal</h2>
+                <p>Comment EduScanAI transforme l'éducation inclusive</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Réduction des inégalités</h3>
+                    <p>Accès équitable à l'éducation pour les élèves en situation de handicap au Sénégal</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-language"></i>
+                    <h3>Valorisation des langues locales</h3>
+                    <p>Intégration du wolof, pulaar et sérère dans l'apprentissage</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Formation des enseignants</h3>
+                    <p>Renforcement des capacités pédagogiques pour l'inclusion</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>Inclusion sociale</h3>
+                    <p>Réduction de la stigmatisation et meilleure intégration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Economic Impact Section -->
+    <section id="economic" class="economic-impact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impact Économique au Sénégal</h2>
+                <p>Les bénéfices économiques d'une éducation inclusive</p>
+            </div>
+            
+            <div class="economic-content">
+                <div class="economic-text">
+                    <h3>Économies pour les familles et l'État</h3>
+                    <p>EduScanAI permet des économies significatives en réduisant :</p>
+                    <ul class="adaptation-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Coûts des matériels spécialisés</strong> : Réduction des besoins en équipements coûteux</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Dépenses de santé</strong> : Moins de consultations spécialisées grâce aux outils intégrés</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Décrochage scolaire</strong> : Réduction du taux d'abandon et ses coûts sociaux</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Formation des enseignants</strong> : Outils intégrés réduisant les besoins de formation externe</li>
+                    </ul>
+                    
+                    <div class="economic-stats">
+                        <div class="economic-stat">
+                            <div class="number">-70%</div>
+                            <p>Coûts des équipements spécialisés</p>
+                        </div>
+                        <div class="economic-stat">
+                            <div class="number">-40%</div>
+                            <p>Décrochage scolaire</p>
+                        </div>
+                        <div class="economic-stat">
+                            <div class="number">+25%</div>
+                            <p>Réussite académique</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="economic-image">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Impact économique">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EduScanAI Sénégal</h3>
+                    <p>Solution innovante d'accessibilité éducative par l'Intelligence Artificielle</p>
+                    <p>Développé par Mademba Sock Diop</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> diopmademba535@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +221 776623721</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Dakar Rufisque, Sénégal</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <p>
+                        <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><br>
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a><br>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a><br>
+                        
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduScanAI Sénégal - Développé par Mademba Sock Diop - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('show');
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fermer le menu mobile si ouvert
+                    document.getElementById('menu').classList.remove('show');
+                }
+            });
+        });
+        
+        // Demo functionality
+        let speechSynthesis = window.speechSynthesis;
+        let speechUtterance = new SpeechSynthesisUtterance();
+        let isReading = false;
+        
+        function applyCustomText() {
+            const customText = document.getElementById('custom-text').value;
+            const textSample = document.getElementById('text-sample');
+            
+            if (customText.trim() !== '') {
+                textSample.innerHTML = `<p>${customText}</p>`;
+            } else {
+                textSample.innerHTML = '<p>Le texte que vous saisirez apparaîtra ici. Vous pourrez ensuite tester les différentes adaptations.</p>';
+            }
+            
+            // Réinitialiser les styles
+            updateTextStyle();
+        }
+        
+        function updateTextStyle() {
+            const textSample = document.getElementById('text-sample');
+            const fontSize = document.getElementById('font-size').value;
+            const contrast = document.getElementById('contrast').value;
+            const fontType = document.getElementById('font-type').value;
+            
+            // Reset all styles
+            textSample.classList.remove('text-large', 'text-extra-large', 'high-contrast', 'dyslexic-font');
+            
+            // Apply selected styles
+            if (fontSize === 'large') {
+                textSample.classList.add('text-large');
+            } else if (fontSize === 'extra-large') {
+                textSample.classList.add('text-extra-large');
+            }
+            
+            if (contrast === 'high') {
+                textSample.classList.add('high-contrast');
+            }
+            
+            if (fontType === 'dyslexic') {
+                textSample.classList.add('dyslexic-font');
+            }
+        }
+        
+        function startTextToSpeech() {
+            const textSample = document.getElementById('text-sample');
+            const textToRead = textSample.textContent;
+            
+            // Stop any ongoing speech
+            stopTextToSpeech();
+            
+            // Configure speech synthesis
+            speechUtterance = new SpeechSynthesisUtterance(textToRead);
+            speechUtterance.lang = 'fr-FR';
+            speechUtterance.rate = 0.9; // Slightly slower than normal
+            speechUtterance.pitch = 1;
+            
+            // Show status
+            const audioStatus = document.getElementById('audio-status');
+            const statusText = document.getElementById('status-text');
+            audioStatus.style.display = 'block';
+            statusText.textContent = 'Lecture en cours...';
+            
+            // Start speech synthesis
+            speechSynthesis.speak(speechUtterance);
+            isReading = true;
+            
+            // Highlight words as they're being read
+            highlightWords(textSample);
+            
+            // Handle when speech ends
+            speechUtterance.onend = function() {
+                isReading = false;
+                statusText.textContent = 'Lecture terminée';
+                setTimeout(() => {
+                    audioStatus.style.display = 'none';
+                }, 2000);
+            };
+        }
+        
+        function pauseTextToSpeech() {
+            if (isReading) {
+                speechSynthesis.pause();
+                document.getElementById('status-text').textContent = 'Lecture en pause';
+            }
+        }
+        
+        function stopTextToSpeech() {
+            speechSynthesis.cancel();
+            isReading = false;
+            document.getElementById('audio-status').style.display = 'none';
+            
+            // Remove any highlighting
+            const textSample = document.getElementById('text-sample');
+            const spans = textSample.querySelectorAll('span.highlighted');
+            spans.forEach(span => {
+                span.outerHTML = span.textContent;
+            });
+        }
+        
+        function highlightWords(element) {
+            const text = element.textContent;
+            const words = text.split(/\s+/);
+            
+            // Clear previous highlights
+            element.innerHTML = element.innerHTML.replace(/<span class="highlighted">([^<]+)<\/span>/g, '$1');
+            
+            // Add highlighting spans around words
+            let newHTML = element.innerHTML;
+            words.forEach(word => {
+                if (word.length > 2) { // Only highlight words longer than 2 characters
+                    const regex = new RegExp(`\\b${word}\\b`, 'g');
+                    newHTML = newHTML.replace(regex, `<span class="highlighted">${word}</span>`);
+                }
+            });
+            
+            element.innerHTML = newHTML;
+        }
+    </script>
+</body>
+</html>
